@@ -1,0 +1,124 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #000; /* Pure black */
+    color: #fff;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Header */
+header h1 {
+    margin: 1.5em 0 0.5em;
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    color: #ffffff;
+    text-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+}
+
+#timer, #move-counter {
+    font-size: 1.3rem;
+    color: #ff4d4d;
+    text-align: center;
+    margin-top: 0.5em;
+}
+
+/* Game Board Layout */
+.game-board {
+    background-color: #111;
+    padding: 2em;
+    border-radius: 1.5em;
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+    max-width: 1000px;
+    border: 2px solid #0ff;
+}
+
+/* Row Layout */
+.game-grid-row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1em;
+}
+
+/* Game Card - Increased size */
+.game-card {
+    width: 8em;
+    height: 8em;
+    background-color: #222;
+    margin: 0.7em;
+    border-radius: 0.7em;
+    overflow: hidden;
+    perspective: 1000px;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+    border: 1px solid #444;
+}
+
+.game-card:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.5);
+}
+
+/* Image hidden by default */
+.game-card-img {
+    visibility: hidden;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0.7em;
+}
+
+/* Reveal image */
+.show-img {
+    visibility: visible;
+    animation: flipCard 0.5s ease forwards;
+}
+
+/* Flip Animation */
+@keyframes flipCard {
+    from {
+        transform: rotateY(90deg);
+        opacity: 0;
+    }
+    to {
+        transform: rotateY(0);
+        opacity: 1;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .game-card {
+        width: 6em;
+        height: 6em;
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+
+    #timer, #move-counter {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .game-card {
+        width: 5em;
+        height: 5em;
+        margin: 0.4em;
+    }
+
+    header h1 {
+        font-size: 1.4rem;
+    }
+}

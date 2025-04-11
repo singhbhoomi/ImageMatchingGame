@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Image Matching Game</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #000;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    header {
+      text-align: center;
+      background-color: black;
+      color: white;
+      padding: 1rem;
+      z-index: 2;
+    }
+
+    #timer,
+    #moveCounter {
+      font-size: 1.2rem;
+      color: red;
+      margin-top: 10px;
+    }
+
+    main {
+      position: relative;
+      z-index: 2;
+    }
+
+    .game-board {
+      background-color: #111;
+      padding: 1.8em;
+      border-radius: 1.2em;
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.3);
+      max-width: 90%;
+      border: 2px solid #0ff;
+      position: relative;
+      z-index: 2;
+    }
+
+    .game-grid-row {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 1em;
+    }
+
+    .game-card {
+      width: 6em;
+      height: 6em;
+      background-color: #222;
+      margin: 0.6em;
+      border-radius: 0.7em;
+      overflow: hidden;
+      perspective: 1000px;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+      border: 1px solid #444;
+    }
+
+    .game-card:hover {
+      transform: scale(1.08);
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.5);
+    }
+
+    .game-card-img {
+      visibility: hidden;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 0.7em;
+    }
+
+    .show-img {
+      visibility: visible;
+      animation: flipCard 0.5s ease forwards;
+    }
+
+    @keyframes flipCard {
+      from {
+        transform: rotateY(90deg);
+        opacity: 0;
+      }
+      to {
+        transform: rotateY(0);
+        opacity: 1;
+      }
+    }
+
+    .bg-title {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 5rem;
+      color: rgba(0, 255, 255, 0.07);
+      z-index: 1;
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+      text-transform: uppercase;
+      letter-spacing: 8px;
+    }
+
+    footer {
+      margin-top: 2em;
+      text-align: center;
+      color: #0ff;
+      font-weight: 600;
+      font-size: 1rem;
+      text-shadow: 0 0 5px #0ff;
+      z-index: 2;
+    }
+
+    @media (max-width: 768px) {
+      .game-card {
+        width: 5em;
+        height: 5em;
+      }
+
+      .bg-title {
+        font-size: 3rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 1.4rem;
+      }
+
+      .game-card {
+        width: 4em;
+        height: 4em;
+        margin: 0.4em;
+      }
+
+      .bg-title {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>You Have only 10 moves</h1>
+    <div id="timer">Time: 0m 0s</div>
+    <div id="moveCounter">Moves: 0</div>
+  </header>
+
+  <main>
+    <div class="bg-title">Image Matching  Game</div>
+    <section>
+      <table class="game-board">
+        <tbody class="game-grid">
+          <tr class="game-grid-row">
+            <td class="game-card"><img class="game-card-img" src="img/1.jpg" alt="cake1" /></td>
+            <td class="game-card"><img class="game-card-img" src="img/2.jpg" alt="cake2" /></td>
+            <td class="game-card"><img class="game-card-img" src="img/3.jpg" alt="cake3" /></td>
+            <td class="game-card"><img class="game-card-img" src="img/4.jpg" alt="cake4" /></td>
+          </tr>
+          <tr class="game-grid-row">
+            <td class="game-card"><img class="game-card-img" src="img/5.jpg" alt="cake5" /></td>
+            <td class="game-card"><img class="game-card-img" src="img/6.jpg" alt="cake6" /></td>
+            <td class="game-card"><img class="game-card-img" src="img/7.jpg" alt="cake7" /></td>
+            <td class="game-card"><img class="game-card-img" src="img/8.jpg" alt="cake8" /></td>
+          </tr>
+          <tr class="game-grid-row">
+            <td class="game-card"><img class="game-card-img" src="img/1.jpg" alt="cake1" /></td>
+            <td class="game-card"><img class="game-card-img" src="img/2.jpg" alt="cake2" /></td>
+            <td class="game-card"><img class="game-card-img" src="img/3.jpg" alt="cake3" /></td>
+            <td class="game-card"><img class="game-card-img" src="img/4.jpg" alt="cake4" /></td>
+          </tr>
+          <tr class="game-grid-row">
+            <td class="game-card"><img class="game-card-img" src="img/5.jpg" alt="cake5" /></td>
+            <td class="game-card"><img class="game-card-img" src="img/6.jpg" alt="cake6" /></td>
+            <td class="game-card"><img class="game-card-img" src="img/7.jpg" alt="cake7" /></td>
+            <td class="game-card"><img class="game-card-img" src="img/8.jpg" alt="cake8" /></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer>
+    Designed by <a href="#bhoomi" id="bhoomi" style="color: #0ff;">Bhoomi Sengar</a>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
